@@ -1,0 +1,97 @@
+/* General Styles */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9c74f; /* Yellow background */
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Image Styling */
+  .home-image {
+    width: 250px; /* Adjust size based on your preference */
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  /* Title Styling */
+  .home-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #d62828; /* Orange-Red */
+    margin-bottom: 10px;
+  }
+  
+  /* Subtitle Styling */
+  .home-subtitle {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* Buttons Container */
+  .home-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Buttons */
+  .home-button {
+    width: 200px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Order Now Button */
+  .order-btn {
+    background-color: #f77f00;
+    color: white;
+    border: 2px solid #f77f00;
+  }
+  
+  .order-btn:hover {
+    background-color: white;
+    color: #f77f00;
+    border: 2px solid #f77f00;
+  }
+  
+  /* Login Button */
+  .login-btn {
+    background-color: white;
+    color: #d62828;
+    border: 2px solid #d62828;
+  }
+  
+  .login-btn:hover {
+    background-color: #d62828;
+    color: white;
+  }
+  
+  /* Signup Button */
+  .signup-btn {
+    background-color: white;
+    color: #f77f00;
+    border: 2px solid #f77f00;
+  }
+  
+  .signup-btn:hover {
+    background-color: #f77f00;
+    color: white;
+  }
+  
+  /* Footer */
+  .home-footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
