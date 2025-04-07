@@ -1,15 +1,40 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUpPage.css";
 
 function SignUpPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [error, setError] = useState("");
 
-  const handleSignUp = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signing up with:", name, email, password);
-    // Later: connect to backend here
+    setError("");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.msg || "Signup failed");
+      }
+
+      // Redirect to login after successful signup
+      navigate("/login");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -17,35 +42,38 @@ function SignUpPage() {
       <h2 className="signup-title">Create an Account</h2>
       <p className="signup-subtitle">Join Campus Cart today!</p>
 
-      <form className="signup-form" onSubmit={handleSignUp}>
+      <form className="signup-form" onSubmit={handleSubmit}>
         <input
           type="text"
+          name="username"
           placeholder="Full Name"
           className="signup-input"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={form.username}
+          onChange={handleChange}
           required
         />
         <input
           type="email"
+          name="email"
           placeholder="Email"
           className="signup-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
           required
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
           className="signup-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
           required
         />
-        <button type="submit" className="signup-button">
-          Sign Up
-        </button>
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
+
+      {error && <p className="signup-error">{error}</p>}
 
       <p className="login-link">
         Already have an account? <a href="/login">Log in</a>

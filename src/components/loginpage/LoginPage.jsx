@@ -1,14 +1,43 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", email, password);
-    // Later: Replace with backend API call
+    setError("");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.msg || "Login failed");
+      }
+
+      // Save the token in localStorage
+      localStorage.setItem("token", data.token);
+
+      // Redirect to logged-in homepage
+      navigate("/customer-requests");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -19,24 +48,26 @@ function LoginPage() {
       <form className="login-form" onSubmit={handleLogin}>
         <input
           type="email"
+          name="email"
           placeholder="Email"
           className="login-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
           required
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
           className="login-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
           required
         />
-        <button type="submit" className="login-button">
-          Log In
-        </button>
+        <button type="submit" className="login-button">Log In</button>
       </form>
+
+      {error && <p className="login-error">{error}</p>}
 
       <p className="signup-link">
         Don’t have an account? <a href="/signup">Sign up</a>
