@@ -1,58 +1,78 @@
-import React, { useState } from "react";
-import "./CustomerBiddings.css";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CustomerBiddings() {
-  const [bids, setBids] = useState([
-    {
-      id: 1,
-      name: "Ali",
-      price: 200,
-      eta: "15 mins",
-    },
-    {
-      id: 2,
-      name: "Fatima",
-      price: 180,
-      eta: "12 mins",
-    },
-    {
-      id: 3,
-      name: "Usman",
-      price: 150,
-      eta: "20 mins",
+  const [bids, setBids] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const fetchBids = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/requests/${userId}`);
+        const requests = await res.json();
+        const activeRequest = requests.find((r) => r.status === "active");
+        if (!activeRequest) return setError("No active request found.");
+
+        const bidRes = await fetch(`http://localhost:5000/api/bids/${activeRequest._id}`);
+        const bidData = await bidRes.json();
+        setBids(bidData);
+      } catch (err) {
+        setError("Failed to load bids.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBids();
+  }, [userId]);
+
+  const handleAcceptBid = async (bidId) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/requests/select-bid`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, bidId }),
+      });
+
+      if (!res.ok) throw new Error("Failed to accept bid.");
+
+      alert("Bid accepted successfully!");
+      navigate("/customer-dashboard");
+    } catch (err) {
+      setError(err.message);
     }
-  ]);
-
-  const [acceptedBid, setAcceptedBid] = useState(null);
-
-  const handleAccept = (bidId) => {
-    const bid = bids.find((b) => b.id === bidId);
-    setAcceptedBid(bid);
   };
 
-  return (
-    <div className="bidding-container">
-      <h2 className="bidding-title">Available Bids for Your Request</h2>
+  if (loading) return <p>Loading bids...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
-      {acceptedBid ? (
-        <div className="accepted-message">
-          You have accepted <strong>{acceptedBid.name}’s</strong> bid for <strong>Rs. {acceptedBid.price}</strong> — ETA: {acceptedBid.eta}
-        </div>
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Bids for Your Active Request</h2>
+      {bids.length === 0 ? (
+        <p>No bids available yet.</p>
       ) : (
-        <ul className="bid-list">
-          {bids.map((bid) => (
-            <li key={bid.id} className="bid-card">
-              <div className="bid-info">
-                <p><strong>{bid.name}</strong></p>
-                <p>Price: Rs. {bid.price}</p>
-                <p>ETA: {bid.eta}</p>
-              </div>
-              <button className="accept-button" onClick={() => handleAccept(bid.id)}>
-                Accept Bid
-              </button>
-            </li>
-          ))}
-        </ul>
+        bids.map((bid) => (
+          <div
+            key={bid._id}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginBottom: "10px",
+              borderRadius: "8px",
+              background: "#f9f9f9",
+            }}
+          >
+            <p><strong>Delivery Person:</strong> {bid.deliveryPersonName}</p>
+            <p><strong>Price:</strong> Rs {bid.price}</p>
+            <p><strong>ETA:</strong> {bid.eta}</p>
+            <button onClick={() => handleAcceptBid(bid._id)}>Accept Bid</button>
+          </div>
+        ))
       )}
     </div>
   );

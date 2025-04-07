@@ -30,6 +30,8 @@ function SignUpPage() {
         throw new Error(data.msg || "Signup failed");
       }
 
+      localStorage.setItem("userId", data.user._id);
+
       // Redirect to login after successful signup
       navigate("/login");
     } catch (err) {

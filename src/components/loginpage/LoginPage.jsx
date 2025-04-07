@@ -13,32 +13,28 @@ function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
-
+  
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(form)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+        }),
       });
-
+  
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.msg || "Login failed");
-      }
-
-      // Save the token in localStorage
-      localStorage.setItem("token", data.token);
-
-      // Redirect to logged-in homepage
-      navigate("/customer-requests");
+      if (!res.ok) throw new Error(data.msg);
+  
+      localStorage.setItem("userId", data.user._id); // ✅ This now saves userId
+      navigate("/select-role");
     } catch (err) {
       setError(err.message);
     }
   };
+  
+  
 
   return (
     <div className="login-container">

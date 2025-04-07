@@ -19,7 +19,15 @@ router.post("/signup", async (req, res) => {
   // Create token
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-  res.status(201).json({ token, user: { id: user._id, username, email } });
+  res.status(201).json({ 
+    token, 
+    user: { 
+      _id: user._id, // ✅ MATCH `_id` here too
+      username, 
+      email 
+    } 
+  });
+  
 });
 
 // Login Route
@@ -35,7 +43,15 @@ router.post("/login", async (req, res) => {
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-  res.json({ token, user: { id: user._id, username: user.username, email } });
+  res.json({ 
+    token, 
+    user: { 
+      _id: user._id, // ✅ KEY FIX: change `id` → `_id`
+      username: user.username,
+      email 
+    } 
+  });
+  
 });
 
 module.exports = router;

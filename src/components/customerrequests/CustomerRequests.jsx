@@ -1,37 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CustomerRequests.css";
 
 function CustomerRequests() {
   const [pickup, setPickup] = useState("");
   const [dorm, setDorm] = useState("");
-  const [item, setItem] = useState("");
-  const [requests, setRequests] = useState([]);
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    const newRequest = {
-      id: Date.now(),
-      pickup,
-      dorm,
-      item,
-      status: "Pending"
-    };
+    try {
+      const res = await fetch("http://localhost:5000/api/requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user: userId,
+          pickup,
+          destination: dorm,
+          description
+        })
+      });
 
-    setRequests([newRequest, ...requests]);
-
-    // Clear form
-    setPickup("");
-    setDorm("");
-    setItem("");
-
-    // Later: send this request to backend
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.msg);
+      alert("Delivery request submitted successfully!");
+      navigate("/customer-dashboard");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
     <div className="request-container">
-      <h2 className="request-title">Place a Delivery Request</h2>
-
+      <h2>Place a Delivery Request</h2>
       <form className="request-form" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -49,25 +56,13 @@ function CustomerRequests() {
         />
         <textarea
           placeholder="Item Description"
-          value={item}
-          onChange={(e) => setItem(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           required
         />
         <button type="submit">Submit Request</button>
       </form>
-
-      <h3 className="previous-title">Your Previous Requests</h3>
-      <ul className="request-list">
-        {requests.length === 0 ? (
-          <p className="no-requests">No requests yet</p>
-        ) : (
-          requests.map((req) => (
-            <li key={req.id} className="request-item">
-              <strong>{req.item}</strong> from <em>{req.pickup}</em> to <em>{req.dorm}</em> — Status: <span>{req.status}</span>
-            </li>
-          ))
-        )}
-      </ul>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

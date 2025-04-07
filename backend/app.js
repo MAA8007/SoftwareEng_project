@@ -26,3 +26,9 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+const requestRoutes = require("./routes/requests");
+app.use("/api/requests", requestRoutes);
+
+const bidRoutes = require("./routes/bids");
+app.use("/api/bids", bidRoutes);

@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/homepage/HomePage";
 import LoginPage from "./components/loginpage/LoginPage";
 import SignUpPage from "./components/signuppage/SignUpPage";
-import CustomerBidding from "./components/customerbiddings/CustomerBiddings";
+import CustomerBiddings from "./components/customerbiddings/CustomerBiddings";
 import CustomerRequests from "./components/customerrequests/CustomerRequests";
 import DeliveryBidding from "./components/deliverybidding/DeliveryBidding";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import RoleSelectionPage from "./components/roleselection/RoleSelectionPage";
+import CustomerDashboard from "./components/customerdashboard/CustomerDashboard";
 
 
 function App() {
@@ -18,9 +20,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/customer-bidding" element={<CustomerBidding />} />
+        <Route path="/customer-bidding" element={<CustomerBiddings />} />
         <Route path="/customer-requests" element={<CustomerRequests />} />
         <Route path="/delivery-bidding" element={<DeliveryBidding />} />
+        <Route path="/select-role" element={<RoleSelectionPage />} />
+        <Route path="/delivery-dashboard" element={<DeliveryBidding />} />
+        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
       </Routes>
       <Footer />
     </Router>
