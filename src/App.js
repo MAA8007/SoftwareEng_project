@@ -10,7 +10,8 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import RoleSelectionPage from "./components/roleselection/RoleSelectionPage";
 import CustomerDashboard from "./components/customerdashboard/CustomerDashboard";
-
+import CustomerHome from "./components/RestaurantListPage/RestaurantList";
+import DeliveryDetailsPage from "./components/DeliveryDetails/DeliveryDetailsPage";
 
 function App() {
   return (
@@ -22,10 +23,11 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/customer-bidding" element={<CustomerBiddings />} />
         <Route path="/customer-requests" element={<CustomerRequests />} />
-        <Route path="/delivery-bidding" element={<DeliveryBidding />} />
         <Route path="/select-role" element={<RoleSelectionPage />} />
         <Route path="/delivery-dashboard" element={<DeliveryBidding />} />
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+        <Route path="/customer-Home" element={<CustomerHome />} />
+        <Route path="/delivery-details" element={<DeliveryDetailsPage />} />
       </Routes>
       <Footer />
     </Router>

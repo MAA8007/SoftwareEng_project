@@ -12,12 +12,12 @@ function CustomerBiddings() {
   useEffect(() => {
     const fetchBids = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/requests/${userId}`);
+        const res = await fetch(`http://localhost:5005/api/requests/${userId}`);
         const requests = await res.json();
         const activeRequest = requests.find((r) => r.status === "active");
         if (!activeRequest) return setError("No active request found.");
 
-        const bidRes = await fetch(`http://localhost:5000/api/bids/${activeRequest._id}`);
+        const bidRes = await fetch(`http://localhost:5005/api/bids/${activeRequest._id}`);
         const bidData = await bidRes.json();
         setBids(bidData);
       } catch (err) {
@@ -32,7 +32,7 @@ function CustomerBiddings() {
 
   const handleAcceptBid = async (bidId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/requests/select-bid`, {
+      const res = await fetch(`http://localhost:5005/api/requests/select-bid`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, bidId }),

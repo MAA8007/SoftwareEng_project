@@ -1,0 +1,97 @@
+.delivery-dashboard {
+  padding: 2rem;
+  font-family: Arial;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.delivery-dashboard-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.no-requests {
+  text-align: center;
+  color: #888;
+}
+
+.request-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.request-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+  width: 300px;
+}
+
+.request-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.request-card p {
+  margin: 0.3rem 0;
+}
+
+.request-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.request-actions button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.request-actions button:nth-child(2) {
+  background: #28a745;
+}
+
+.bid-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bid-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.bid-content input {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.modal-actions button {
+  padding: 0.5rem 1rem;
+}

@@ -1,0 +1,25 @@
+.delivery-details {
+  padding: 30px;
+  background: #fdfdfd;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.receipt {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.receipt h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.receipt p {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
