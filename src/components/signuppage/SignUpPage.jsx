@@ -1,3 +1,4 @@
+// src/components/signuppage/SignUpPage.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignUpPage.css";
@@ -31,9 +32,9 @@ function SignUpPage() {
       }
 
       localStorage.setItem("userId", data.user._id);
+      localStorage.setItem("username", data.user.username); // ✅ Save username (optional)
 
-      // Redirect to login after successful signup
-      navigate("/login");
+      navigate("/login"); // You can skip login and go to /select-role instead if preferred
     } catch (err) {
       setError(err.message);
     }

@@ -1,3 +1,4 @@
+// src/components/loginpage/LoginPage.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
@@ -13,7 +14,7 @@ function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
@@ -23,18 +24,18 @@ function LoginPage() {
           password: form.password,
         }),
       });
-  
+
       const data = await res.json();
       if (!res.ok) throw new Error(data.msg);
-  
-      localStorage.setItem("userId", data.user._id); // ✅ This now saves userId
+
+      localStorage.setItem("userId", data.user._id);
+      localStorage.setItem("username", data.user.username); // ✅ Save username
+
       navigate("/select-role");
     } catch (err) {
       setError(err.message);
     }
   };
-  
-  
 
   return (
     <div className="login-container">

@@ -1,38 +1,57 @@
 /* src/components/navbar/Navbar.css */
 
 .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #262626;
-    color: white;
-    padding: 12px 0;
-    position: relative;
-  }
-  
-  .logo {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff5722;
-  }
-  
-  /* 🔧 Separate floating settings button */
-  .settings-icon {
-    position: absolute;
-    top: 12px;
-    right: 20px;
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    background-color: #262626;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .settings-icon:hover {
-    background-color: #3a3a3a;
-    color: #f0c040;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #262626;
+  color: white;
+  padding: 12px 24px;
+  position: relative;
+}
+
+.logo {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Settings button */
+.settings-btn {
+  background-color: #262626;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.settings-btn:hover {
+  background-color: #3a3a3a;
+  color: #f0c040;
+}
+
+/* Logout button */
+.logout-btn {
+  background-color: #262626;
+  color: white;
+  font-size: 16px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #3a3a3a;
+  color: #f0c040;
+}
