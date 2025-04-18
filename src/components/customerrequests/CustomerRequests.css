@@ -1,0 +1,74 @@
+/* .request-container {
+    padding: 40px;
+    font-family: "Poppins", sans-serif;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .request-title {
+    font-size: 1.8rem;
+    color: #003049;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+  
+  .request-form input,
+  .request-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+  }
+  
+  .request-form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .request-form button {
+    padding: 12px;
+    background-color: #f77f00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .request-form button:hover {
+    background-color: #c75e00;
+  }
+  
+  .previous-title {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #003049;
+    text-align: center;
+  }
+  
+  .request-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .request-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .no-requests {
+    text-align: center;
+    color: #888;
+  }
+   */

@@ -1,0 +1,58 @@
+/* .bidding-container {
+    padding: 40px;
+    font-family: "Poppins", sans-serif;
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .bidding-title {
+    font-size: 1.8rem;
+    color: #003049;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .bid-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .bid-card {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .bid-info p {
+    margin: 4px 0;
+  }
+  
+  .accept-button {
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .accept-button:hover {
+    background-color: #21867a;
+  }
+  
+  .accepted-message {
+    text-align: center;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+   */
